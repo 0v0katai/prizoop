@@ -144,12 +144,9 @@ inline void undefined(void) {
 	#endif
 	#endif
 
-#if DEBUG
 	int key;
-	GetKey(&key);
-#endif
-
-	exit(-1);
+	while(1)
+        GetKey(&key);
 }
 
 void cb_n(unsigned int instruction);

@@ -4,6 +4,7 @@
 
 #include "screen_settings.h"
 #include "ptune2_simple/Ptune2_direct.h"
+#include "config.h"
 
 struct option_type {
 	const char* name;
@@ -191,7 +192,7 @@ void screen_settings::selectKeys() {
 		Bdisp_AreaClr(&area, 1, COLOR_WHITE);
 
 		const char* pressKey = "Press key for ";
-		const char* exitPrompt = "Press MENU to cancel";
+		const char* exitPrompt = _("Press MENU to cancel", "Press HOME to cancel");
 
 		int line1WidthA = PrintWidth(pressKey);
 		int line1WidthB = PrintWidth(keyName[i]);
@@ -208,7 +209,7 @@ void screen_settings::selectKeys() {
 		newMap[i] = getCurrentKey();
 
 		// MENU = cancel
-		if (newMap[i] == 48)
+		if (newMap[i] == _(48,69))
 			return;
 	}
 

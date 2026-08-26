@@ -4,14 +4,14 @@
 #include "string.h"
 #include "stdlib.h"
 
-#include "fxcg\display.h"
-#include "fxcg\keyboard.h"
-#include "fxcg\file.h"
-#include "fxcg\registers.h"
-#include "fxcg\rtc.h"
-#include "fxcg\system.h"
-#include "fxcg\serial.h"
-#include "fxcg\tmu.h"
+#include "fxcg/display.h"
+#include "fxcg/keyboard.h"
+#include "fxcg/file.h"
+#include "fxcg/registers.h"
+#include "fxcg/rtc.h"
+#include "fxcg/system.h"
+#include "fxcg/serial.h"
+#include "fxcg/tmu.h"
 
 #if TARGET_WINSIM
 #define ALIGN(x) alignas(x)
@@ -30,7 +30,7 @@ extern "C" {
 #define FORCE_INLINE __attribute__((always_inline)) inline
 #define RESTRICT __restrict__
 #include "fxcg_registers.h"
-#include "fxcg\heap.h"
+#include "fxcg/heap.h"
 #define malloc sys_malloc
 #define calloc sys_calloc
 #define realloc sys_realloc

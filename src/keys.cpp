@@ -3,6 +3,7 @@
 #include "debug.h"
 #include "gpu.h"
 #include "snd/snd.h"
+#include "config.h"
 
 struct keys_type keys;
 
@@ -48,7 +49,7 @@ void refreshKeys(bool systemCalls) {
 		//	while (keyDown_fast(emulator.settings.keyMap[emu_button::STATE_LOAD])) {}
 		}
 
-		if (keyDown_fast(48)) {
+		if (keyDown_fast(_(48,69))) {
 			// this will set keys.exit once a full frame renders
 			enablePausePreview();
 		}

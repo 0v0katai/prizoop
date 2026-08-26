@@ -7,6 +7,7 @@
 #include "screen_settings.h"
 #include "screen_play.h"
 #include "screen_faq.h"
+#include "config.h"
 
 emulator_type emulator;
 
@@ -56,8 +57,8 @@ bool emulator_type::isCGBRomLoaded() {
 void emulator_type::run() {
 	screens[curScreen]->select();
 
+	int key;
 	do {
-		int key;
 		GetKey(&key);
 
 		switch (key) {
@@ -77,26 +78,26 @@ void emulator_type::run() {
 			case KEY_CTRL_EXE:
 				screens[curScreen]->handleSelect();
 				break;
-			case KEY_CTRL_F1:
+			case _(KEY_CTRL_F1, 30037):
 				tryScreenChange(1);
 				break;
-			case KEY_CTRL_F2:
+			case _(KEY_CTRL_F2, 30003):
 				tryScreenChange(2);
 				break;
-			case KEY_CTRL_F3:
+			case _(KEY_CTRL_F3, 30075):
 				tryScreenChange(3);
 				break;
-			case KEY_CTRL_F4:
+			case _(KEY_CTRL_F4, 30066):
 				tryScreenChange(4);
 				break;
-			case KEY_CTRL_F5:
+			case _(KEY_CTRL_F5, 30074):
 				tryScreenChange(5);
 				break;
-			case KEY_CTRL_F6:
+			case _(KEY_CTRL_F6, 30065):
 				tryScreenChange(6);
 				break;
 		}
-	} while (1);
+	} while (key != KEY_CTRL_EXIT);
 }
 
 void emulator_type::tryScreenChange(int targetFKey) {
@@ -130,14 +131,14 @@ void emulator_type::defaultSettings() {
 	settings.useCGBColors = true;
 	settings.sound = false;
 
-	settings.keyMap[emu_button::A] = 78;			// SHIFT
-	settings.keyMap[emu_button::B] = 68;			// OPTN
+	settings.keyMap[emu_button::A] = _(78,77);			// SHIFT
+	settings.keyMap[emu_button::B] = _(68,76);			// ALPHA
 	settings.keyMap[emu_button::SELECT] = 39;		// F5
 	settings.keyMap[emu_button::START] = 29;		// F6
-	settings.keyMap[emu_button::RIGHT] = 27;
-	settings.keyMap[emu_button::LEFT] = 38;
-	settings.keyMap[emu_button::UP] = 28;
-	settings.keyMap[emu_button::DOWN] = 37;
+	settings.keyMap[emu_button::RIGHT] = _(27,38);
+	settings.keyMap[emu_button::LEFT] = _(38,58);
+	settings.keyMap[emu_button::UP] = _(28,49);
+	settings.keyMap[emu_button::DOWN] = _(37,47);
 	settings.keyMap[emu_button::STATE_SAVE] = 43;	// 'S'
 	settings.keyMap[emu_button::STATE_LOAD] = 25;   // 'L'
 
