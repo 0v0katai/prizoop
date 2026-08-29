@@ -34,14 +34,15 @@ target_compile_options(prizoop PRIVATE
 target_link_options(prizoop PRIVATE
   -L "${CMAKE_CURRENT_SOURCE_DIR}"
   -T "${CMAKE_CURRENT_SOURCE_DIR}/prizm.ld"
-  -Wl,-Map=map -Wl,-print-memory-usage)
+  -Wl,-Map=map -Wl,-print-memory-usage
+  -Wl,-gc-sections)
 
 target_link_libraries(prizoop PRIVATE
   zx7 calctype snd scope_timer ptune2_simple
-  -lsyscall-${SYSCALL_PLATFORM} -lc -lgcc)
+  -lsyscall-${PLATFORM} -lc -lgcc)
 
 if("${FXSDK_PLATFORM_LONG}" STREQUAL fxCG50)
-  if("${SYSCALL_PLATFORM}" STREQUAL cw)
+  if("${PLATFORM}" STREQUAL cw)
     generate_g3a(TARGET prizoop OUTPUT "prizoop_cw.g3a"
       NAME "Prizoop" ICONS icon-uns.png icon-sel.png)
   else()

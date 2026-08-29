@@ -1,8 +1,9 @@
 #ifndef PRIZOOP_CONFIG
+#define PRIZOOP_CONFIG
 
 #define cg 0
 #define cw 1
-#define SYSCALL_PLATFORM @SYSCALL_PLATFORM@
-#define _(cg,cw) (SYSCALL_PLATFORM == cg ? cg : cw)
+#define PLATFORM @PLATFORM@
+#define _(CG,CW) (PLATFORM == cg ? CG : CW)
 
 #endif
