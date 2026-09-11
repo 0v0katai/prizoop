@@ -38,6 +38,7 @@ void(*drawFramebuffer)(void) = 0;
 
 #define LCD_GRAM	0x202
 #define LCD_BASE	0xB4000000
+#define DISPLAY		((volatile unsigned short*)LCD_BASE)
 #define SYNCO() __asm__ volatile("SYNCO\n\t":::"memory");
 
 // DMA0 operation register
@@ -55,16 +56,11 @@ static int curScanBuffer = 0;
 static int curScan = 0;
 
 void SelectVRAMDataRegister(void){
-    if (PLATFORM == cw) {
-        Bdisp_DDRegisterSelect(0xDA);
-        if (*DISPLAY == 0x32 || *DISPLAY == 0x52)
-            Bdisp_DDRegisterSelect(0x2C);
-        else
-            Bdisp_DDRegisterSelect(LCD_GRAM);
-    }
-    else {
-        Bdisp_DDRegisterSelect(LCD_GRAM);
-    }
+	Bdisp_DDRegisterSelect(0xDA);
+	if (*DISPLAY == 0x32 || *DISPLAY == 0x52)
+		Bdisp_DDRegisterSelect(0x2C);
+	else
+		Bdisp_DDRegisterSelect(LCD_GRAM);
 }
 
 void DmaWaitNext(void) {
