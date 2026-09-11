@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(prizoop LANGUAGES C CXX ASM VERSION "01.00.0000")
 
 include(GenerateG3A)
+include(FetchContent)
 
 configure_file(src/config.h.in include/config.h)
 add_compile_definitions(TARGET_PRIZM=1 DEBUG=0)
@@ -16,11 +17,27 @@ include_directories(
   "${CMAKE_CURRENT_SOURCE_DIR}/include"
   "${CMAKE_CURRENT_BINARY_DIR}/include")
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/utils/zx7"            "utils/zx7")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/utils/calctype"       "utils/calctype")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/utils/snd"            "utils/snd")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/utils/scope_timer"    "utils/scope_timer")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/utils/ptune2_simple"  "utils/ptune2_simple")
+FetchContent_Declare(zx7
+  GIT_REPOSITORY https://github.com/0v0katai/prizm-zx7
+  GIT_TAG master
+  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/zx7")
+FetchContent_Declare(calctype
+  GIT_REPOSITORY https://github.com/0v0katai/calctype
+  GIT_TAG master
+  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/calctype")
+FetchContent_Declare(snd
+  GIT_REPOSITORY https://github.com/0v0katai/prizm-snd
+  GIT_TAG master
+  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/snd")
+FetchContent_Declare(scope_timer
+  GIT_REPOSITORY https://github.com/0v0katai/scope_timer
+  GIT_TAG main
+  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/scope_timer")
+FetchContent_Declare(ptune2_simple
+  GIT_REPOSITORY https://github.com/0v0katai/ptune2_simple
+  GIT_TAG master
+  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/ptune2_simple")
+FetchContent_MakeAvailable(zx7 calctype snd scope_timer ptune2_simple)
 
 add_executable(prizoop ${SOURCES})
 
