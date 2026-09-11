@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(prizoop LANGUAGES C CXX ASM VERSION "01.00.0000")
+project(prizoop LANGUAGES C CXX ASM VERSION "01.11.0000")
 
 include(GenerateG3A)
 include(FetchContent)
